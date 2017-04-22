@@ -1,0 +1,30 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{# Va chercher la page layout.html.twig #}
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+{# Récupére le titre du parent et ajoute le titre de la page dans l'onglet #}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{# Défini le body de notre page, ce body est propre au views/layout.html.twig  #}
+{% block ocplatform_body %}
+
+  <h2>Liste des annonces</h2>
+
+  <ul>
+    {% for advert in listAdverts %}
+      <li>
+        <a href="{{ path('oc_platform_view', {'id': advert.id}) }}">
+          {{ advert.title }}
+        </a>
+        par {{ advert.author }},
+        le {{ advert.date|date('d/m/Y') }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'annonces</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
